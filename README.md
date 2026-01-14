@@ -58,12 +58,28 @@ request = {
 }
 client.retrieve(dataset, request).download()
 ```
-### Step 3- 
-This step reads the downloaded NetCDF files using xarray, converts each solar
-irradiance component into a pandas DataFrame, and combines them into a single
-dataset. The final dataset is exported as a CSV file for further analysis. 
+### Step 3 – Spatial aggregation and GHI energy calculation
+
+This step processes the Global Horizontal Irradiance (GHI) data by aggregating
+the irradiance values over time for each latitude–longitude grid point and
+converting them into accumulated solar energy.
+
 ```python
-ds_GHI = xr.open_dataset('v4.6_GHI_clear_2011_01.area-subset.51.0.8.0.42.0.-5.nc', engine='h5netcdf')
+ds_GHI = xr.open_dataset(
+    'v4.6_GHI_clear_2011_01.area-subset.51.0.8.0.42.0.-5.nc',
+    engine='h5netcdf'
+)
+
 df_converted_GHI = ds_GHI.to_dataframe()
-df_converted_GHI
+
+df_sum = (
+    df_converted_GHI
+    .groupby(["latitude", "longitude"])["global_horizontal_clear_sky_irradiation"]
+    .sum()
+    .reset_index()
+)
+
+df_sum["GHI_energy_Wh_m2"] = (
+    df_sum["global_horizontal_clear_sky_irradiation"] * 0.25
+)
 ```
