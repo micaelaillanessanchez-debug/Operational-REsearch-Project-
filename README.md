@@ -100,7 +100,12 @@ hi_grid = ghi_grid[sorted(ghi_grid.columns)]     # longitudes croissantes
 ghi_grid = ghi_grid.sort_index(ascending=True)   # latitudes croissantes (Sud → Nord)
 
 ```
-### heatmap CODE POUR IRRADIATION HEAT MAP
+### Step 4 – Creation of the irradiation heatmap 
+This step generates a heat map of cumulative Global Horizontal Irradiation (GHI) using a latitude–longitude grid. 
+To ensure correct geographical orientation, the latitude axis is inverted so that the South is displayed at the bottom and the North at the top, consistent with conventional map representations. 
+A sequential color map is applied, where warmer colors indicate higher solar irradiation levels. This visualization allows the identification of zones with higher and lower solar resource availability
+
+```python
 plt.figure(figsize=(12,8))
 sns.heatmap(
     ghi_grid[::-1],  # inverse les lignes pour que le Sud soit en bas
@@ -111,3 +116,60 @@ plt.title("Global Horizontal Irradiation (Cumulative)")
 plt.xlabel("Longitude")
 plt.ylabel("Latitude")
 plt.show()
+```
+
+<img width="983" height="723" alt="image" src="https://github.com/user-attachments/assets/bd365b70-a28c-41a4-821f-6818655e60fe" />
+
+### Step 5 Generation of georeferenced Irradiation heat map
+This step generates a georeferenced heat map of cumulative Global Horizontal Irradiation (GHI).
+The spatial domain corresponds to the CAMS study area, defined by minimum and maximum latitude and longitude values.
+
+The GHI values are plotted using pcolormesh, which associates each grid cell with its exact geographical coordinates. The latitude and longitude vectors are explicitly created from the grid structure to ensure correct spatial alignment. Unlike matrix-based plots, no axis inversion is required because the data are already ordered in increasing latitude.
+
+A sequential color scale (yellow to red) is applied, where warmer colors indicate higher cumulative solar irradiation. 
+The resulting map allows a clear visualization of the spatial variability of solar resources across the territory, providing essential insight for regional-scale photovoltaic potential assessment.
+```python
+# CODE POUR IRRADIATION HEATMAP + CARTE DES PAYS
+# Zone CAMS
+lat_min, lat_max = 42.0, 51.0
+lon_min, lon_max = -5.0, 8.0
+
+plt.figure(figsize=(18,10))
+
+# Axe géographique Cartopy
+ax = plt.axes(projection=ccrs.PlateCarree())
+ax.set_extent([lon_min, lon_max, lat_min, lat_max], crs=ccrs.PlateCarree())
+
+# Ajouter carte
+ax.add_feature(cfeature.LAND, facecolor='lightgray')
+ax.add_feature(cfeature.BORDERS, edgecolor='black')
+ax.add_feature(cfeature.COASTLINE)
+
+# -----------------------
+# Heatmap CAMS
+# -----------------------
+# Créer les coordonnées exactes de la grille
+lon = np.array(sorted(ghi_grid.columns))
+lat = np.array(sorted(ghi_grid.index))  # latitudes croissantes
+
+# Meshgrid pour imshow
+Lon, Lat = np.meshgrid(lon, lat)
+
+# Afficher la heatmap
+pcm = ax.pcolormesh(
+    Lon, Lat, ghi_grid.values,  # pas besoin d'inverser
+    cmap='YlOrRd',
+    alpha=1,
+    shading='auto'              # très important pour que les pixels correspondent
+)
+
+# Ajouter colorbar
+plt.colorbar(pcm, ax=ax, label='GHI cumulative (Wh/m²)')
+
+# Axes et titre
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+plt.title("Global Horizontal Irradiation (Cumulative) over France")
+plt.show()
+```
+<img width="1313" height="820" alt="image" src="https://github.com/user-attachments/assets/7e175008-1436-4f45-b0b7-7eae914c97a7" />
