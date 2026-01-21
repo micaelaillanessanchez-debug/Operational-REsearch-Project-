@@ -124,7 +124,7 @@ plt.show()
 
 <img width="983" height="723" alt="image" src="https://github.com/user-attachments/assets/bd365b70-a28c-41a4-821f-6818655e60fe" />
 
-### Step 5 Generation of georeferenced Irradiation heat map
+### Step 5 Generation of georeferenced Irradiation heat map 
 This step generates a georeferenced heat map of cumulative Global Horizontal Irradiation (GHI).
 The spatial domain corresponds to the CAMS study area, defined by minimum and maximum latitude and longitude values.
 
@@ -177,4 +177,27 @@ plt.title("Global Horizontal Irradiation (Cumulative) over France")
 plt.show()
 ```
 <img width="1313" height="820" alt="image" src="https://github.com/user-attachments/assets/7e175008-1436-4f45-b0b7-7eae914c97a7" />
-### Step 6 Generation of georeferenced Irradiation heat map for the hole year 2022
+
+
+### Step 6- Generation of georeferenced Irradiation heat map for the hole year 2022
+<img width="1291" height="820" alt="image" src="https://github.com/user-attachments/assets/aaa81bd2-e7e5-43e6-a6b6-b8b0702f6a87" />
+
+
+### Recognising the panels
+
+```python
+!pip install roboflow
+!pip install ultralytics
+!pip install roboflow
+```
+```python
+from roboflow import Roboflow
+rf = Roboflow(api_key="buMGF1FhJBQTVvngwajD")
+project = rf.workspace("myprojects-20ycu").project("usmb-3ou0v")
+version = project.version(1)
+dataset = version.download("yolov11")
+
+
+
+
+<img width="519" height="615" alt="image" src="https://github.com/user-attachments/assets/086846e7-4e2c-4c9f-a7e5-d43e3d91b0e6" />
