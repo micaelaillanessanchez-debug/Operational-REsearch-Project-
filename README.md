@@ -117,7 +117,7 @@ hi_grid = ghi_grid[sorted(ghi_grid.columns)]     # longitudes croissantes
 ghi_grid = ghi_grid.sort_index(ascending=True)   # latitudes croissantes (Sud → Nord)
 
 ```
-### Step 4 – Creation of the irradiation heatmap 
+### Step 5 – Creation of the irradiation heatmap 
 This step generates a heat map of cumulative Global Horizontal Irradiation (GHI) using a latitude–longitude grid. 
 To ensure correct geographical orientation, the latitude axis is inverted so that the South is displayed at the bottom and the North at the top, consistent with conventional map representations. 
 A sequential color map is applied, where warmer colors indicate higher solar irradiation levels. This visualization allows the identification of zones with higher and lower solar resource availability
@@ -137,7 +137,7 @@ plt.show()
 
 <img width="983" height="723" alt="image" src="https://github.com/user-attachments/assets/bd365b70-a28c-41a4-821f-6818655e60fe" />
 
-### Step 5 Generation of georeferenced Irradiation heat map 
+### Step 6 Generation of georeferenced Irradiation heat map 
 This step generates a georeferenced heat map of cumulative Global Horizontal Irradiation (GHI).
 The spatial domain corresponds to the CAMS study area, defined by minimum and maximum latitude and longitude values.
 
@@ -192,9 +192,32 @@ plt.show()
 <img width="1313" height="820" alt="image" src="https://github.com/user-attachments/assets/7e175008-1436-4f45-b0b7-7eae914c97a7" />
 
 
-### Step 6- Generation of georeferenced Irradiation heat map for the hole year 2022
+### Step 7- Generation of georeferenced Irradiation heat map for the hole year 2022
 <img width="1291" height="820" alt="image" src="https://github.com/user-attachments/assets/aaa81bd2-e7e5-43e6-a6b6-b8b0702f6a87" />
 
+
+### Step 8- Generation of the mean temperature map in 2022
+```python
+c = cdsapi.Client(url='https://ads.atmosphere.copernicus.eu/api', key='56ff124d-08b8-4fe3-a524-e45272516d72', verify=False)
+
+dataset = "cams-global-reanalysis-eac4-monthly"
+request = {
+    "variable": ["2m_temperature"],
+    "year": ["2022"],
+    "month": [
+        "01", "02", "03",
+        "04", "05", "06",
+        "07", "08", "09",
+        "10", "11", "12"
+    ],
+    "product_type": ["monthly_mean"],
+    "data_format": "grib",
+    "area": [51.0, -5, 42.0, 8.0]
+}
+
+c.retrieve(dataset, request).download()
+```
+<img width="1280" height="808" alt="image" src="https://github.com/user-attachments/assets/0b9b88d1-8c5f-4e88-b2e6-788e3fceb3ef" />
 
 ### Recognising the panels
 Installing dependencies
