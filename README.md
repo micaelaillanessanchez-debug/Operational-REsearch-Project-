@@ -219,6 +219,48 @@ c.retrieve(dataset, request).download()
 ```
 <img width="1280" height="808" alt="image" src="https://github.com/user-attachments/assets/0b9b88d1-8c5f-4e88-b2e6-788e3fceb3ef" />
 
+
+
+###STEP 9-  Generation of a combined Temperature degradation x GHI for 2022
+
+
+"This is the last step, I promise. We tried to combine both temperature and irradiation data to create a new, more relevant map for solar panels—a map integrating the effect of temperature on PV performance. To do this, we extrapolated the temperature column from our temperature DataFrame onto the irradiation grid. Be careful here: the two DataFrames do not have the same spatial resolution:
+
+0.75° for temperature
+
+0.1° for irradiation
+
+```python
+# Interpoler la température sur la grille GHI
+t2m_on_ghi_grid = t2m_annual_mean_c.interp(
+    latitude=ghi_energy.latitude,
+    longitude=ghi_energy.longitude,
+    method="nearest"
+)
+
+t2m_on_ghi_grid
+```
+After doing so we correct the GHI with a chosen performance degradation factor : -0.35% per °C above 25°C 
+
+```python
+temp_factor_on_ghi = -0.35 * (
+    (t2m_on_ghi_grid + 273.15) - (273 + 25)
+)
+
+GHI_temp_corrected = ghi_energy * temp_factor_on_ghi
+
+df_final = (
+    GHI_temp_corrected
+    .to_dataframe(name="GHI_temp_corrected")
+    .reset_index()
+)
+
+df_final
+```
+We obtain our new map :
+
+<img width="1280" height="813" alt="image" src="https://github.com/user-attachments/assets/c34634c7-d1e7-4b83-819f-2dcb006afe76" />
+
 ### Recognising the panels
 Installing dependencies
 This step installs the required Python libraries used throughout the project. Roboflow is used to manage and download the annotated dataset, while Ultralytics provides the YOLO framework used for training the segmentation model. 
