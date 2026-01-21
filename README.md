@@ -20,7 +20,7 @@ Where the area chosen is defined by the next coordinates
 lat_min, lat_max = 42.0, 51.0
 lon_min, lon_max = -5.0, 8.0
 
-The Proyect was done considering data from the year 2011
+The Proyect was done considering data from the year 2022
 
 ### Step 1 – Import required libraries
 This step installs and imports the Python libraries required to download and
@@ -177,3 +177,4 @@ plt.title("Global Horizontal Irradiation (Cumulative) over France")
 plt.show()
 ```
 <img width="1313" height="820" alt="image" src="https://github.com/user-attachments/assets/7e175008-1436-4f45-b0b7-7eae914c97a7" />
+### Step 6 Generation of georeferenced Irradiation heat map for the hole year 2022
