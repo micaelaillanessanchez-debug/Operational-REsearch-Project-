@@ -219,6 +219,16 @@ c.retrieve(dataset, request).download()
 ```
 <img width="1280" height="808" alt="image" src="https://github.com/user-attachments/assets/0b9b88d1-8c5f-4e88-b2e6-788e3fceb3ef" />
 
+###Step 9
+# Interpoler la température sur la grille GHI
+t2m_on_ghi_grid = t2m_annual_mean_c.interp(
+    latitude=ghi_energy.latitude,
+    longitude=ghi_energy.longitude,
+    method="nearest"
+)
+
+t2m_on_ghi_grid
+
 ### Recognising the panels
 Installing dependencies
 This step installs the required Python libraries used throughout the project. Roboflow is used to manage and download the annotated dataset, while Ultralytics provides the YOLO framework used for training the segmentation model. 
