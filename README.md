@@ -26,11 +26,24 @@ The Proyect was done considering data from the year 2022
 This step installs and imports the Python libraries required to download and
 process climate data from the Copernicus Climate Data Store.
 
-- `cdsapi` is used to access and download climate datasets
-- `netcdf4` enables reading NetCDF climate data files
-- `xarray` is used to manipulate multi-dimensional climate data
-- `pandas` is used for data analysis and tabular processing
-AGREGAR LAS OTRAS LIBRARIES
+-cdsapi is used to access and download climate datasets from the Copernicus Climate Data Store.
+
+-netcdf4 enables reading and handling NetCDF climate data files.
+
+-xarray is used to manipulate multi-dimensional climate datasets, particularly time-series and gridded data.
+
+-pandas is used for data analysis, aggregation, and tabular data processing.
+
+-numpy provides efficient numerical operations and array manipulation.
+
+-cartopy is used for geospatial projections and map-based visualizations.
+
+-geopandas enables the handling and analysis of geospatial vector data.
+
+-matplotlib is used for plotting and visualizing data.
+
+-seaborn provides high-level statistical data visualization built on top of Matplotlib
+
 ```python
 import numpy as np
 import cartopy.crs as ccrs
@@ -56,7 +69,7 @@ request = {
     "variable": ["global_horizontal_irradiation"],
     "sky_type": ["clear"],
     "version": ["4.6"],
-    "year": ["2011"],
+    "year": ["2022"],
     "month": [
         "01"
     ],
@@ -184,20 +197,38 @@ plt.show()
 
 
 ### Recognising the panels
-
+Installing dependencies
+This step installs the required Python libraries used throughout the project. Roboflow is used to manage and download the annotated dataset, while Ultralytics provides the YOLO framework used for training the segmentation model. 
 ```python
 !pip install roboflow
 !pip install ultralytics
 !pip install roboflow
 ```
+Connecting to Roboflow and downloading the dataset: This code initializes the Roboflow API . It selects a particular dataset version and downloads it in YOLOv11 format, which includes the images, annotations
+
 ```python
 from roboflow import Roboflow
 rf = Roboflow(api_key="buMGF1FhJBQTVvngwajD")
 project = rf.workspace("myprojects-20ycu").project("usmb-3ou0v")
 version = project.version(1)
 dataset = version.download("yolov11")
+```
+Model initialization and training: This code imports the YOLO framework from the Ultralytics library and initializes a pretrained YOLOv11 segmentation model. A lightweight model variant (yolo11s-seg) is selected to balance computational efficiency and segmentation performance. The model is then trained using the dataset configuration defined in the data.yaml file. Training parameters such as the number of epochs, input image resolution, batch size, and number of data-loading workers are defined 
+```python
+import os
+from ultralytics import YOLO # Ensure YOLO is imported
 
-
-
-
+# carregar modelo
+#model = YOLO("yolo11l-seg.pt") # Initialize the model
+model =YOLO("yolo11s-seg.pt")
+# treinar
+model.train(
+    data=os.path.join(dataset.location, "data.yaml"),
+    epochs=2,         # mais épocas para convergência melhor
+    imgsz=416,         # imagens maiores para detalhes
+    batch=4,           # aproveitando os 16GB da GPU
+    workers=8,          # pode aumentar se sua máquina tiver muitos núcleos
+    project="usmb-3ou0v",
+    name="exp_highres"
+```
 <img width="519" height="615" alt="image" src="https://github.com/user-attachments/assets/086846e7-4e2c-4c9f-a7e5-d43e3d91b0e6" />
