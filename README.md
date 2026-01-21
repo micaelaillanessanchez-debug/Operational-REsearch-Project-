@@ -219,12 +219,9 @@ c.retrieve(dataset, request).download()
 ```
 <img width="1280" height="808" alt="image" src="https://github.com/user-attachments/assets/0b9b88d1-8c5f-4e88-b2e6-788e3fceb3ef" />
 
+### Step 9- Generation of a combined Temperature degradation x GHI for 2022
 
-
-###STEP 9-  Generation of a combined Temperature degradation x GHI for 2022
-
-
-"This is the last step, I promise. We tried to combine both temperature and irradiation data to create a new, more relevant map for solar panels—a map integrating the effect of temperature on PV performance. To do this, we extrapolated the temperature column from our temperature DataFrame onto the irradiation grid. Be careful here: the two DataFrames do not have the same spatial resolution:
+This is the last step, I promise. We tried to combine both temperature and irradiation data to create a new, more relevant map for solar panels—a map integrating the effect of temperature on PV performance. To do this, we extrapolated the temperature column from our temperature DataFrame onto the irradiation grid. Be careful here: the two DataFrames do not have the same spatial resolution:
 
 0.75° for temperature
 
