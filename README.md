@@ -1,7 +1,8 @@
 # Operational-REsearch-Project-
-
+CODE LINK: https://colab.research.google.com/drive/1gMk1vfGNk7KZkYFkVCpmbJ9QJ91zM3zF?usp=sharing#scrollTo=AaVIO3rascFM
 ## Description
 This repository contains the information about the project where our main goal is to analice the corelation to the temperature and irraciance map of france.
+
 
 ## Tool used to get the database
 The analysis is based on reanalysis data obtained from Climate Data Store (CDS), a European repository of climate and atmospheric data. 
@@ -13,10 +14,13 @@ Specifically, the project employs the following datasets
 -considering temperature:
 https://ads.atmosphere.copernicus.eu/datasets/cams-global-reanalysis-eac4-monthly?tab=download
 
-where the area chosen is defined by the next coordinates
+-coordinates website: geojson.io
 
+Where the area chosen is defined by the next coordinates
+lat_min, lat_max = 42.0, 51.0
+lon_min, lon_max = -5.0, 8.0
 
-the year 2011
+The Proyect was done considering data from the year 2011
 
 ### Step 1 – Import required libraries
 This step installs and imports the Python libraries required to download and
