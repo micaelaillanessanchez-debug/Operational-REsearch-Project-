@@ -14,7 +14,7 @@ Specifically, the project employs the following datasets
 -considering temperature:
 https://ads.atmosphere.copernicus.eu/datasets/cams-global-reanalysis-eac4-monthly?tab=download
 
--coordinates website: geojson.io
+-coordinates website: https://geojson.io/
 
 Where the area chosen is defined by the next coordinates
 lat_min, lat_max = 42.0, 51.0
