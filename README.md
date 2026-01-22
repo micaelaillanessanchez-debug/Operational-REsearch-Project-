@@ -264,7 +264,6 @@ This step installs the required Python libraries used throughout the project. Ro
 ```python
 !pip install roboflow
 !pip install ultralytics
-!pip install roboflow
 ```
 Connecting to Roboflow and downloading the dataset: This code initializes the Roboflow API . It selects a particular dataset version and downloads it in YOLOv11 format, which includes the images, annotations
 
