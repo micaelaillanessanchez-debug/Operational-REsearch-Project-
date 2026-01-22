@@ -4,7 +4,7 @@ CODE LINK: https://colab.research.google.com/drive/1gMk1vfGNk7KZkYFkVCpmbJ9QJ91z
 This repository contains the information about the project where our main goal is to analice the corelation to the temperature and irraciance map of france.
 
 
-## Tool used to get the database
+## Tools used to get the database
 The analysis is based on reanalysis data obtained from Climate Data Store (CDS), a European repository of climate and atmospheric data. 
 Specifically, the project employs the following datasets
 
@@ -221,7 +221,7 @@ c.retrieve(dataset, request).download()
 
 ### Step 9- Generation of a combined Temperature degradation x GHI for 2022
 
-This is the last step, I promise. We tried to combine both temperature and irradiation data to create a new, more relevant map for solar panels—a map integrating the effect of temperature on PV performance. To do this, we extrapolated the temperature column from our temperature DataFrame onto the irradiation grid. Be careful here: the two DataFrames do not have the same spatial resolution:
+We tried to combine both temperature and irradiation data to create a new, more relevant map for solar panels—a map integrating the effect of temperature on PV performance. To do this, we extrapolated the temperature column from our temperature DataFrame onto the irradiation grid. Be careful here: the two DataFrames do not have the same spatial resolution:
 
 0.75° for temperature
 
