@@ -1,5 +1,7 @@
 # Operational-Research-Project- Lucas Caredda - Micaela Illanes
 Irradiation and Temperature CODE LINK : https://colab.research.google.com/drive/1gMk1vfGNk7KZkYFkVCpmbJ9QJ91zM3zF?usp=sharing#scrollTo=AaVIO3rascFM
+
+
 Panel recognition CODE LINK: https://colab.research.google.com/github/rjlobosco/usmb_26/blob/main/USMB_solar_project_panel_detection.ipynb#scrollTo=2W-lEcDizt05
 ## Description
 This repository contains the information about the project where our main goal is to analice the corelation to the temperature and irradiance of France. After that, our objective was to analice the relationship betweem temperature and Pv performace
