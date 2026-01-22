@@ -1,7 +1,7 @@
 # Operational-Research-Project- Lucas Caredda - Micaela Illanes
 CODE LINK: https://colab.research.google.com/drive/1gMk1vfGNk7KZkYFkVCpmbJ9QJ91zM3zF?usp=sharing#scrollTo=AaVIO3rascFM
 ## Description
-This repository contains the information about the project where our main goal is to analice the corelation to the temperature and irraciance map of france.
+This repository contains the information about the project where our main goal is to analice the corelation to the temperature and irradiance of France. After that to analice the relationship betweem temperature and Pv performace
 
 
 ## Tools used to get the database
